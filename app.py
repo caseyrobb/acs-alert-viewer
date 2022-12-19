@@ -5,7 +5,7 @@ from flask import Flask, request, Response, jsonify, json, abort, render_templat
 app = Flask(__name__)
 
 # redis connection
-r = redis.StrictRedis(host='localhost', port=6379, decode_responses=True)
+r = redis.StrictRedis(host='redis', port=6379, decode_responses=True)
 try:
     r.ping()
 except (redis.exceptions.ConnectionError, ConnectionRefusedError):
