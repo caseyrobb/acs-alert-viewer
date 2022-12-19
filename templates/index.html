@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Cluster Security Alerts</title>
+    <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css">
+    <style>
+      .alert-body {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+    </style>
+</head>
+<body>
+  <div class="alert-body">
+    <span>
+      <h1>Alerts</h1>
+      <table class="primary">
+        <thead>
+          <tr>
+            <th>Date (UTC)</th>
+            <th>Alert ID</th>
+            <th>Title</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in alerts: %}
+            <tr>
+              <td>{{ a["alert"]["time"] }}</td>
+              <td><a href="/alert/{{ a['alert']['id'] }}">{{ a["alert"]["id"] }}</a></td>
+              <td>{{ a["alert"]["policy"]["name"] }}</td>
+              <td>{{ a["alert"]["policy"]["description"] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </span>
+  </div>
+</body>
+
+</html>

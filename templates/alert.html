@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ alerts["alert"]["policy"]["name"] }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css">
+    <style>
+      .alert-body {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+    </style>
+</head>
+<body>
+  <div class="alert-body">
+    <span>
+      <h1>Alerts</h1>
+      <p><b>Alert ID:  </b>{{ alerts["alert"]["id"] }}</p>
+      <p><b>Time:  </b>{{ alerts["alert"]["time"] }}</p>
+      <p><b>Title:  </b>{{ alerts["alert"]["policy"]["name"] }}</p>
+      <p><b>Severity:  </b>{{ alerts["alert"]["policy"]["severity"] }}</p>
+      <p><b>Lifecycle Stage:  </b>{{ alerts["alert"]["lifecycleStage"] }}</p>
+      <p><b>Namespace:  </b>{{ alerts["alert"]["namespace"] }}</p>
+      <p><b>Deployment:  </b>{{ alerts["alert"]["deployment"]["name"] }}</p>
+      <p><b>Description:  </b>{{ alerts["alert"]["policy"]["description"] }}</p>
+      {% if 'processViolation' in alerts["alert"]: %}
+        <p><b>Process Violation:  </b>{{ alerts["alert"]["processViolation"]["message"] }}</p>
+      {% endif %}
+      <p><b>Rationale:  </b>{{ alerts["alert"]["policy"]["rationale"] }}</p>
+      <p><b>Remediation:  </b>{{ alerts["alert"]["policy"]["remediation"] }}</p>
+      <p>
+        <a href="/">Back to Alerts</a>
+      </p>
+    </span>
+  </div>
+</body>
+
+</html>
