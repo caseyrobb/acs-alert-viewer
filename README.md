@@ -33,7 +33,6 @@ $ curl -XPOST \
 
 acs-alert-viewer.json example:
 ```json
-$ cat acs-alert-viewer.json
 {
   "id": "",
   "name": "webhook",
