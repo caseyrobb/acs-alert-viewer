@@ -6,12 +6,10 @@ RUN microdnf update -y && microdnf install python3-pip -y && microdnf clean all 
 
 COPY ./requirements.txt /app/requirements.txt
 COPY ./templates /app
-COPY ./start.sh /app
 
 WORKDIR /app
 
 RUN python3 -m pip install -r requirements.txt
-RUN chmod +x start.sh
 
 COPY . /app
 
