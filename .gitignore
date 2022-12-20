@@ -3,6 +3,7 @@ lib/
 lib64
 pyvenv.cfg
 k8s
+openshift
 
 *.json
 *.pyc
