@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: acs-alert-viewer
+  name: acs-alert-viewer
+  namespace: acs-alert-viewer
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 5000-tcp
+    port: 5000
+  selector:
+    app: acs-alert-viewer
+    deployment: acs-alert-viewer

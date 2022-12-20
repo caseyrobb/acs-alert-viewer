@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: acs-alert-viewer
+  name: acs-alert-viewer
+  namespace: acs-alert-viewer
+spec:
+  host: acs-alert-viewer.apps.ocp.redcomet.ca
+  port:
+    targetPort: 5000-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: acs-alert-viewer
+    weight: 100
+  wildcardPolicy: None
