@@ -1,3 +1,5 @@
+[![Docker Repository on Quay](https://quay.io/repository/carobb/acs-alert-viewer/status "Docker Repository on Quay")](https://quay.io/repository/carobb/acs-alert-viewer)
+
 # acs-alert-viewer
 
 A bare-bones Flask/Redis site that allows you to send and view alerts from Red Hat Advanced Cluster Security for Kubernetes (RHACS).  
@@ -6,7 +8,9 @@ A bare-bones Flask/Redis site that allows you to send and view alerts from Red H
 
 ```shell
 $ git clone https://github.com/caseyrobb/acs-alert-viewer
+
 $ oc apply -k acs-alert-viewer/openshift
+
 $ ACSALERT=$(oc get route -n acs-alert-viewer acs-alert-viewer -o jsonpath='{.spec.host}{"\n"}')
 ```
 
@@ -17,23 +21,20 @@ $ ACSALERT=$(oc get route -n acs-alert-viewer acs-alert-viewer -o jsonpath='{.sp
 Navigate to *Platform Configuration -> Integrations -> Generic Webhook* and enter `${ACSALERT}/api/v1/webhook` as the Endpoint URL. 
 
 
-
 ### Configure via API
 
 ```shell
 $ CENTRAL=$(oc get route -n stackrox central -o jsonpath='{.spec.host}{"\n"}')
 
-
 $ curl -XPOST \
-				-H 'Content-Type: application/json' \
-			 	-H "Authorization: Bearer ${ROX_API_TOKEN}" \
-				-d @acs-alert-viewer.json \
-				https://${CENTRAL}/v1/notifiers
+	-H 'Content-Type: application/json' \
+ 	-H "Authorization: Bearer ${ROX_API_TOKEN}" \
+	-d @acs-alert-viewer.json \
+	https://${CENTRAL}/v1/notifiers
 ```
 
 acs-alert-viewer.json example:
 ```json
-$ cat acs-alert-viewer.json
 {
   "id": "",
   "name": "webhook",
