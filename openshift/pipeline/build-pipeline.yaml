@@ -1,0 +1,55 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: aav-build
+  namespace: acs-alert-viewer
+spec:
+  tasks:
+  - name: git-clone
+    params:
+    - name: url
+      value: https://github.com/caseyrobb/acs-alert-viewer
+    - name: revision
+      value: master
+    - name: submodules
+      value: "true"
+    - name: depth
+      value: "1"
+    - name: sslVerify
+      value: "true"
+    - name: deleteExisting
+      value: "true"
+    - name: verbose
+      value: "true"
+    - name: gitInitImage
+      value: registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:17866349209d9c91a44a0ceabaf1a01559839b2349f112a465aba532d1bf1efa
+    - name: userHome
+      value: /tekton/home
+    taskRef:
+      kind: ClusterTask
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: scratch
+  - name: s2i-python
+    params:
+    - name: VERSION
+      value: latest
+    - name: PATH_CONTEXT
+      value: .
+    - name: TLSVERIFY
+      value: "true"
+    - name: IMAGE
+      value: quay.io/carobb/acs-alert-viewer
+    - name: BUILDER_IMAGE
+      value: registry.redhat.io/rhel8/buildah@sha256:23fb7971ea6ac4aaaaa1139473a602df0df19222a3b5a76b551b2b9ddd92e927
+    runAfter:
+    - git-clone
+    taskRef:
+      kind: ClusterTask
+      name: s2i-python
+    workspaces:
+    - name: source
+      workspace: scratch
+  workspaces:
+  - name: scratch
