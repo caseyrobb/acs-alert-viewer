@@ -20,6 +20,7 @@ $ ACSALERT=$(oc get route -n acs-alert-viewer acs-alert-viewer -o jsonpath='{.sp
 
 Navigate to *Platform Configuration -> Integrations -> Generic Webhook* and enter `${ACSALERT}/api/v1/webhook` as the Endpoint URL. 
 
+![alt text](https://raw.githubusercontent.com/caseyrobb/acs-alert-viewer/master/webui.png)
 
 ### Configure via API
 
