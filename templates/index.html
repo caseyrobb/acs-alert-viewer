@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Advanced Cluster Security Alerts</title>
-    <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>
     <style>
       .alert-body {
         max-width: 1400px;
@@ -23,6 +24,7 @@
       <table class="primary">
         <thead>
           <tr>
+            <th>#</th>
             <th>Date (UTC)</th>
             <th>Alert ID</th>
             <th>Title</th>
@@ -32,12 +34,19 @@
         <tbody>
           {% for a in alerts: %}
             <tr>
+              <td>{{ loop.index + (page - 1) * per_page }}</td>
               <td>{{ a["alert"]["time"] | formatDate }}</td>
               <td><a href="/alert/{{ a['alert']['id'] }}">{{ a["alert"]["id"] }}</a></td>
               <td>{{ a["alert"]["policy"]["name"] }}</td>
               <td>{{ a["alert"]["policy"]["description"] }}</td>
             </tr>
           {% endfor %}
+          <tr>
+            <td colspan="5">{{ pagination.links }}</td>
+          </tr>
+          <tr>
+            <td colspan="5">{{ pagination.info }}</td>
+          </tr>
         </tbody>
       </table>
     </span>
