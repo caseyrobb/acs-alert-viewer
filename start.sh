@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sleep 3
+sleep 10
 python3 app.py
