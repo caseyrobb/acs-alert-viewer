@@ -1,3 +1,5 @@
+[![Docker Repository on Quay](https://quay.io/repository/carobb/acs-alert-viewer/status "Docker Repository on Quay")](https://quay.io/repository/carobb/acs-alert-viewer)
+
 # acs-alert-viewer
 
 A bare-bones Flask/Redis site that allows you to send and view alerts from Red Hat Advanced Cluster Security for Kubernetes (RHACS).  
