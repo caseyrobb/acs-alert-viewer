@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# Local testing with Podman
 
 if [[ -z "$(podman pod ls | grep acs-alerts)" ]]; then
   printf "Creating pod..."
