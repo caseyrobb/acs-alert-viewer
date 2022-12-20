@@ -6,7 +6,9 @@ A bare-bones Flask/Redis site that allows you to send and view alerts from Red H
 
 ```shell
 $ git clone https://github.com/caseyrobb/acs-alert-viewer
+
 $ oc apply -k acs-alert-viewer/openshift
+
 $ ACSALERT=$(oc get route -n acs-alert-viewer acs-alert-viewer -o jsonpath='{.spec.host}{"\n"}')
 ```
 
@@ -17,12 +19,10 @@ $ ACSALERT=$(oc get route -n acs-alert-viewer acs-alert-viewer -o jsonpath='{.sp
 Navigate to *Platform Configuration -> Integrations -> Generic Webhook* and enter `${ACSALERT}/api/v1/webhook` as the Endpoint URL. 
 
 
-
 ### Configure via API
 
 ```shell
 $ CENTRAL=$(oc get route -n stackrox central -o jsonpath='{.spec.host}{"\n"}')
-
 
 $ curl -XPOST \
 	-H 'Content-Type: application/json' \
