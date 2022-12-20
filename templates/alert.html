@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css">
     <style>
       .alert-body {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 40px auto;
         padding: 0 20px;
       }
@@ -17,10 +17,16 @@
     <span>
       <h1>Alerts</h1>
       <p><b>Alert ID:  </b>{{ alerts["alert"]["id"] }}</p>
-      <p><b>Time:  </b>{{ alerts["alert"]["time"] }}</p>
+      <p><b>Time:  </b>{{ alerts["alert"]["time"] | formatDate }}</p>
       <p><b>Title:  </b>{{ alerts["alert"]["policy"]["name"] }}</p>
       <p><b>Severity:  </b>{{ alerts["alert"]["policy"]["severity"] }}</p>
-      <p><b>Lifecycle Stage:  </b>{{ alerts["alert"]["lifecycleStage"] }}</p>
+      {% if 'lifecycleStages' in alerts["alert"]["policy"]: %}
+        <p><b>Lifecycle Stages: </b>
+          {{ alerts["alert"]["policy"]["lifecycleStages"]|join(', ') }}
+        </p>
+      {% else %}
+        <p><b>Lifecycle Stage:  </b>{{ alerts["alert"]["lifecycleStage"] }}</p>
+      {% endif %}
       <p><b>Namespace:  </b>{{ alerts["alert"]["namespace"] }}</p>
       <p><b>Deployment:  </b>{{ alerts["alert"]["deployment"]["name"] }}</p>
       <p><b>Description:  </b>{{ alerts["alert"]["policy"]["description"] }}</p>

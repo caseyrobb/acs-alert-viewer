@@ -1,6 +1,7 @@
 import redis
 from redis.commands.json.path import Path
 from flask import Flask, request, Response, jsonify, json, abort, render_template
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -21,13 +22,17 @@ def post_alert():
     return Response(status=200)
 
 
+@app.template_filter('formatDate')
+def formatDate(sdate):
+    return datetime.strptime(sdate[:19], "%Y-%m-%dT%H:%M:%S")
+
+
 # @app.route('/api/v1/alert/<id>', methods=['GET'])
 def get_alert(id):
     alert = r.json().get(f"alert:{id}")
     if not alert:
         return jsonify(id=f"{id}", status="Not found")
     return alert
-
 
 # @app.route('/api/v1/alerts', methods=['GET'])
 def get_alerts():

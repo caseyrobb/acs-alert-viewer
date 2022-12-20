@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="https://unpkg.com/boltcss/bolt.min.css">
     <style>
       .alert-body {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 40px auto;
         padding: 0 20px;
+        table-layout: auto;
+      }
+      table td, table th {
+        max-width: 400px;
       }
     </style>
 </head>
@@ -28,7 +32,7 @@
         <tbody>
           {% for a in alerts: %}
             <tr>
-              <td>{{ a["alert"]["time"] }}</td>
+              <td>{{ a["alert"]["time"] | formatDate }}</td>
               <td><a href="/alert/{{ a['alert']['id'] }}">{{ a["alert"]["id"] }}</a></td>
               <td>{{ a["alert"]["policy"]["name"] }}</td>
               <td>{{ a["alert"]["policy"]["description"] }}</td>
