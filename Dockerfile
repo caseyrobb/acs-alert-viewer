@@ -19,4 +19,4 @@ EXPOSE 5000
 
 USER 1001
 
-CMD ["sh", "start.sh"]
+CMD ["python3", "app.py"]
