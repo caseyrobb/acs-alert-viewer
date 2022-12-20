@@ -25,10 +25,10 @@ $ CENTRAL=$(oc get route -n stackrox central -o jsonpath='{.spec.host}{"\n"}')
 
 
 $ curl -XPOST \
-				-H 'Content-Type: application/json' \
-			 	-H "Authorization: Bearer ${ROX_API_TOKEN}" \
-				-d @acs-alert-viewer.json \
-				https://${CENTRAL}/v1/notifiers
+	-H 'Content-Type: application/json' \
+ 	-H "Authorization: Bearer ${ROX_API_TOKEN}" \
+	-d @acs-alert-viewer.json \
+	https://${CENTRAL}/v1/notifiers
 ```
 
 acs-alert-viewer.json example:
